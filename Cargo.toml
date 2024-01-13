@@ -1,15 +1,10 @@
 [package]
 name = "tafelwerk"
-version = "0.1.0"
+version = "0.2.0-alpha"
 edition = "2021"
 authors = ["Luca Lewin <contact@lucalewin.dev>"]
-description = "physics / chemisty simulator"
+description = "collection of math, physics and chemisty related crates/functions"
 license = "MIT OR Apache-2.0"
 homepage = "https://lucalewin.dev/projects/tafelwerk"
-documentation = "https://lucalewin.dev/docs/tafelwerk"
+documentation = "https://lucalewin.dev/projects/tafelwerk/docs"
 repository = "https://github.com/lucalewin/tafelwerk"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
-[dependencies]
-measurement = "0.1"
