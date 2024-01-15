@@ -1,5 +1,6 @@
-pub mod ndarray;
 pub mod algorithms;
+pub mod array;
+pub mod ndarray;
 
 /// inludes endpoint
 pub fn linear_space(start: f64, end: f64, num: usize) -> Vec<f64> {

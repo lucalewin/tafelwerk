@@ -1,10 +1,16 @@
-use tafelwerk::{ndarray::NdArray, algorithms::explicit_euler};
+use tafelwerk::{algorithms::numerical::euler_method, ndarray::NdArray};
 
 fn main() {
     let (x, y) = approx_position(0.5, 1.0);
     println!("x = {:?}", x);
     println!("y = {:?}", y);
 }
+
+const P: f64 = 0.45;
+const CW: f64 = 1.21;
+const D: f64 = 0.24;
+const M: f64 = 0.6;
+const G: f64 = 9.81;
 
 pub fn approx_position(z: f64, a: f64) -> (Vec<f64>, Vec<f64>) {
     const T: f64 = 1.;
@@ -13,12 +19,6 @@ pub fn approx_position(z: f64, a: f64) -> (Vec<f64>, Vec<f64>) {
     let s0 = 9.;
     let x0 = 0.;
     let y0 = 1.75;
-
-    const P: f64 = 0.45;
-    const CW: f64 = 1.21;
-    const D: f64 = 0.24;
-    const M: f64 = 0.6;
-    const G: f64 = 9.81;
 
     let vx0 = s0 * a.cos();
     let vy0 = s0 * a.sin();
@@ -37,7 +37,19 @@ pub fn approx_position(z: f64, a: f64) -> (Vec<f64>, Vec<f64>) {
         NdArray::from_array(&[vx, vy, ax, ay])
     };
 
-    let (_, u) = explicit_euler(derivative, 0.0, T, N, initial_values);
+    let (_, u) = euler_method(derivative, 0.0, T, N, initial_values);
 
     u.iter().map(|arr| (arr[0], arr[1])).unzip()
+}
+
+pub fn find_optimal_angle(z0: f64, a0: f64) -> (f64, f64) {
+    let xb = 2.0;
+    let yb = 3.05;
+
+    let func = |z: f64, a: f64| -> (f64, f64) {
+        let (x, y) = approx_position(z, a);
+        (x.last().unwrap() - xb, y.last().unwrap() - yb)
+    };
+    let jacobian = |z: f64, a: f64| {};
+    todo!()
 }

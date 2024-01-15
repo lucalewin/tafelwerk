@@ -1,4 +1,4 @@
-use std::ops::{Index, Mul, Add};
+use std::ops::{Add, Index, Mul};
 
 #[derive(Debug)]
 pub struct NdArray {
@@ -56,11 +56,13 @@ impl Add<NdArray> for &NdArray {
             panic!("wrong length") // FIXME
         }
 
-        let items = self.items.iter()
+        let items = self
+            .items
+            .iter()
             .zip(rhs.items)
             .map(|(a, b)| a + b)
             .collect();
-        
+
         NdArray { items }
     }
 }
