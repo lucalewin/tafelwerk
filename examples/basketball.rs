@@ -1,4 +1,7 @@
-use tafelwerk::{algorithms::numerical::{euler_method, jacobian_matrix}, ndarray::NdArray};
+use tafelwerk::{
+    algorithms::numerical::{euler_method, jacobian_matrix},
+    ndarray::NdArray,
+};
 
 fn main() {
     let (x, y) = approx_position(0.5, 1.0);

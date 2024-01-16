@@ -1,4 +1,4 @@
-use std::ops::{Add, Mul, Sub, Div};
+use std::ops::{Add, Div, Mul, Sub};
 
 use crate::linear_space;
 
@@ -18,7 +18,7 @@ where
     T: Mul<f64, Output = T>,
     T: Div<f64, Output = T>,
     T: Mul<U, Output = U>,
-    T: Copy
+    T: Copy,
 {
     let t = linear_space(start, end, iterations);
     let mut u = Vec::with_capacity(iterations);
@@ -57,10 +57,13 @@ where
 //     let h = t[1] - t[0];
 // }
 
-pub fn jacobian_matrix<const N: usize>(func: impl Fn([f64; N]) -> [f64; N], args: [f64; N]) -> [[f64; N]; N] {
+pub fn jacobian_matrix<const N: usize>(
+    func: impl Fn([f64; N]) -> [f64; N],
+    args: [f64; N],
+) -> [[f64; N]; N] {
     let h = 1e-8;
     let mut j = [[0.0; N]; N];
-    
+
     for i in 0..N {
         let mut s = args;
         s[i] += h;

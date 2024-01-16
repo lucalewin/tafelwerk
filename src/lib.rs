@@ -1,4 +1,4 @@
-use std::ops::{Sub, Div, Mul, Add};
+use std::ops::{Add, Div, Mul, Sub};
 
 pub mod algorithms;
 pub mod array;
@@ -11,7 +11,7 @@ where
     T: Sub<T, Output = T>,
     T: Mul<f64, Output = T>,
     T: Div<f64, Output = T>,
-    T: Copy
+    T: Copy,
 {
     if num == 1 {
         return vec![end];
