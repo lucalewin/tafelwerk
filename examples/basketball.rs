@@ -1,9 +1,11 @@
-use tafelwerk::{algorithms::numerical::euler_method, ndarray::NdArray};
+use tafelwerk::{algorithms::numerical::{euler_method, jacobian_matrix}, ndarray::NdArray};
 
 fn main() {
     let (x, y) = approx_position(0.5, 1.0);
     println!("x = {:?}", x);
     println!("y = {:?}", y);
+    let (t, a) = find_optimal_angle(0.5, 1.0);
+    println!("optimal time: {}s, angle: {}rad", t, a);
 }
 
 const P: f64 = 0.45;
@@ -27,7 +29,7 @@ pub fn approx_position(z: f64, a: f64) -> (Vec<f64>, Vec<f64>) {
 
     const C: f64 = -P * CW * std::f64::consts::FRAC_PI_8 * D * D / M;
 
-    let derivative = move |_, u: &NdArray| -> NdArray {
+    let derivative = move |_: &f64, u: &NdArray| -> NdArray {
         let s = (u[2] * u[2] + u[3] * u[3]).sqrt();
         let vx = u[2] * z;
         let vy = u[3] * z;
@@ -46,10 +48,10 @@ pub fn find_optimal_angle(z0: f64, a0: f64) -> (f64, f64) {
     let xb = 2.0;
     let yb = 3.05;
 
-    let func = |z: f64, a: f64| -> (f64, f64) {
-        let (x, y) = approx_position(z, a);
-        (x.last().unwrap() - xb, y.last().unwrap() - yb)
+    let func = |args: [f64; 2]| -> [f64; 2] {
+        let (x, y) = approx_position(args[0], args[1]);
+        [x.last().unwrap() - xb, y.last().unwrap() - yb]
     };
-    let jacobian = |z: f64, a: f64| {};
+    let jacobian = |z: f64, a: f64| jacobian_matrix(func, [z, a]);
     todo!()
 }

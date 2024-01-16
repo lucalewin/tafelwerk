@@ -1,18 +1,27 @@
-use std::marker::PhantomData;
+// use std::marker::PhantomData;
 
-pub struct ArrayBase<T, D> {
-    items: Vec<T>,
-    _dim: PhantomData<D>,
-}
+// /// T: type
+// /// D: dimension (shape)
+// pub struct ArrayBase<T, const D: [usize]> {
+//     items: Vec<T>,
+// }
 
-pub struct Array {}
+// impl<T, const D: [usize]> ArrayBase<T, D> {
+//     pub fn zeros() -> Self {
+//         todo!()
+//     }
 
-impl Array {
-    pub fn zeros() -> Self {
-        Self {}
-    }
+//     pub fn empty() -> Self {
+//         todo!()
+//     }
+// }
 
-    pub fn empty() -> Self {
-        Self {}
-    }
-}
+// #[cfg(test)]
+// mod tests{
+//     use super::ArrayBase;
+
+//     #[test]
+//     fn test() {
+//         let t = ArrayBase::<f64, 3>::empty();
+//     }
+// }

@@ -64,8 +64,6 @@ pub fn newtons(
     x
 }
 
-pub fn newtons_ndim
-
 pub fn secant(func: fn(f64) -> f64, start: f64, end: f64, iterations: usize) -> f64 {
     let mut x1 = start;
     let mut x2 = end;

@@ -1,9 +1,18 @@
+use std::ops::{Sub, Div, Mul, Add};
+
 pub mod algorithms;
 pub mod array;
 pub mod ndarray;
 
 /// inludes endpoint
-pub fn linear_space(start: f64, end: f64, num: usize) -> Vec<f64> {
+pub fn linear_space<T>(start: T, end: T, num: usize) -> Vec<T>
+where
+    T: Add<T, Output = T>,
+    T: Sub<T, Output = T>,
+    T: Mul<f64, Output = T>,
+    T: Div<f64, Output = T>,
+    T: Copy
+{
     if num == 1 {
         return vec![end];
     }
